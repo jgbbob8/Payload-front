@@ -1,0 +1,41 @@
+---
+// Importa tu layout (opcional)
+import Layout from '../layouts/Layout.astro';
+
+// Fetch en cada carga de página (SSR)
+const apiUrl = 'https://payload-back.vercel.app/api/hostingPlans';
+const response = await fetch(apiUrl);
+const { docs: planes } = await response.json();
+---
+
+<Layout title="Planes de Hosting">
+  <main>
+    <h1>Planes Disponibles</h1>
+    
+    <!-- Lista dinámica -->
+    <div class="grid">
+      {planes.map((plan) => (
+        <div class="card">
+          <h2>{plan.plan}</h2>
+          <p>Tipo: {plan.tipo?.nombre}</p>
+          <!-- Más campos si existen -->
+          {plan.precio && <p>Precio: ${plan.precio}</p>}
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+</style>
