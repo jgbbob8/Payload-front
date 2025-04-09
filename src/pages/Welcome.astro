@@ -3,7 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 
 // Fetch en cada carga de página (SSR)
-const apiUrl = 'https://payload-back.vercel.app/api/hostingPlans';
+const apiUrl = 'https://payload-back.vercel.app/api/hostingPlans?limit=100';
 const response = await fetch(apiUrl);
 const { docs: planes } = await response.json();
 ---
