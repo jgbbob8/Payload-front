@@ -3,7 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 
 // Fetch en cada carga de página (SSR)
-const apiUrl = 'https://payload-back.vercel.app/api/hostingPlans?limit=100';
+const apiUrl = import.meta.env.API_URL; // Cambia esto por tu URL real
 const response = await fetch(apiUrl);
 const { docs: planes } = await response.json();
 ---
@@ -14,7 +14,7 @@ const { docs: planes } = await response.json();
     
     <!-- Lista dinámica -->
     <div class="grid">
-      {planes.map((plan) => (
+      {planes.map((plan: { plan: unknown; tipo: { nombre: unknown; }; precio: unknown; }) => (
         <div class="card">
           <h2>{plan.plan}</h2>
           <p>Tipo: {plan.tipo?.nombre}</p>

@@ -8,9 +8,11 @@ interface HostingPlan {
   // Agrega aquí otros campos que necesites
 }
 
+const apiUrl = import.meta.env.API_URL;
+
 async function getHostingPlans() {
   try {
-    const response = await fetch('https://payload-back.vercel.app/api/hostingPlans');
+    const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
